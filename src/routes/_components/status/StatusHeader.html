@@ -1,14 +1,16 @@
-<div class="status-header {isStatusInNotification ? 'status-in-notification' : ''} {notificationType === 'follow' ? 'header-is-follow' : ''}">
-  <div class="status-header-avatar {timelineType === 'pinned' || notificationType === 'poll' ? 'hidden' : ''}">
+<div class="status-header {isStatusInNotification ? 'status-in-notification' : ''} {notificationType === 'follow' ? 'header-is-follow' : ''} {isFollow ? 'follow-notification' : ''}">
+{#if timelineType !== 'pinned' && notificationType !== 'poll'}
+  <div class="status-header-avatar">
     <a id={avatarElementId}
        href="/accounts/{accountId}"
        rel="prefetch"
        aria-hidden="true"
        tabindex="-1"
     >
-      <Avatar {account} size="extra-small"/>
+      <Avatar {account} size="{isFollow ? 'small' : 'extra-small'}"/>
     </a>
   </div>
+{/if}
   <SvgIcon className="status-header-svg" href={icon} />
 
   <div class="status-header-content">
@@ -28,12 +30,14 @@
     {/if}
 
     <span class="status-header-action">{actionText}</span>
+    {#if isStatusInNotification}
+      &nbsp;—&nbsp;<span class="status-header-text">{text}</span>
+    {/if}
   </div>
 </div>
 <style>
   .status-header {
     grid-area: header;
-    margin: 0 10px 5px 5px;
     display: flex;
     align-items: center;
   }
@@ -43,6 +47,28 @@
 
   .status-header-avatar {
     margin-left: 19px; /* offset for avatar, 48px - 24px - 5px */
+  }
+
+  .status-in-notification .status-header-avatar {
+    margin-left: 0px; /* offset for avatar, 48px - 24px - 5px */
+  }
+
+  .status-header.follow-notification {
+    font-size: 1.5em;
+  }
+
+  .status-header-avatar a {
+    display: flex;
+  }
+
+  .status-header-text {
+    flex: 10;
+    margin-right: 1ch;
+    white-space: nowrap;
+    font-style: italic;
+    opacity: 0.8;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   :global(.status-header-svg) {
@@ -146,6 +172,15 @@
         }
         return '#fa-star'
       },
+      isFollow: ({ notificationType }) => {
+        if (notificationType === 'follow') {
+          return true
+        } else if (notificationType === 'follow_request') {
+          return true
+        }
+        return false
+      },
+      text: ({ originalStatus }) => (originalStatus.text || '').substring(0, 100),
       actionText: ({ notificationType, status, $currentVerifyCredentials }) => {
         if (notificationType === 'reblog') {
           return 'intl.rebloggedYou'

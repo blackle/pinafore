@@ -1,0 +1,20 @@
+<Title name="{intl.compose}" />
+
+  <LazyPage {pageComponent} {params} />
+
+<script>
+  import Title from './_components/Title.html'
+  import LazyPage from './_components/LazyPage.html'
+  import pageComponent from './_pages/compose.html'
+
+  export default {
+    components: {
+
+      Title,
+      LazyPage
+    },
+    data: () => ({
+      pageComponent
+    })
+  }
+</script>

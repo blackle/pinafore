@@ -4,8 +4,6 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, SemaphoreRegular, sans-serif;
-  font-size: 14px;
   line-height: 1.5;
   color: var(--body-text-color);
   background: var(--body-bg);
@@ -15,7 +13,11 @@ body {
   @media (max-width: 240px) {
     font-size: 0.75em; /* tiny text for tiny screens */
   }
+}
 
+body, button {
+  font-family: "Merriweather", "Liberation Serif", "Times New Roman", serif;
+  font-size: 14px;
 }
 
 .main-content {
@@ -33,15 +35,13 @@ body {
 
 main {
   position: relative;
-  width: 602px;
+  width: 802px;
   // take into account scrollbars;
   // https://stackoverflow.com/a/34884924
   max-width: 100%;
   padding: 0;
   box-sizing: border-box;
   margin: 0 auto var(--main-margin-bottom);
-  background: var(--main-bg);
-  border: var(--main-border-size) solid var(--main-border);
   border-radius: 1px;
   min-height: 70vh;
 }
@@ -59,13 +59,33 @@ footer {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 0.5em 0;
-  font-weight: 400;
+  margin: 0.5em 0 0.5em 0;
+  font-weight: bold;
   line-height: 1.2;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2.0em;
+}
+
+h3 {
+  font-size: 1.7em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.4em;
+}
+
+h6 {
+  font-size: 1.3em;
 }
 
 a {

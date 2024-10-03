@@ -22,7 +22,7 @@ export default {
       <a rel="noopener" target="_blank"
          href="https://github.com/NickColley/semaphore/blob/main/LICENSE">AGPL License</a>.
       It is a continuation of the Pinafore project created by
-         <a rel="noopener" target="_blank" href="https://nolanlawson.com">Nolan Lawson</a>.
+         <a rel="noopener" target="_blank" href="https://nolanlawson.com">Nolan Lawson</a>. This is the "Chost" patch by <a href="https://blackle-mori.com/">Blackle Mori</a>.
     </p>
   `,
   // Manifest
@@ -64,6 +64,7 @@ export default {
   federated: 'Federated',
   home: 'Home',
   local: 'Local',
+  compose: 'Compose',
   notifications: 'Notifications',
   mutedUsers: 'Muted users',
   pinnedStatuses: 'Pinned toots',
@@ -336,7 +337,7 @@ export default {
     <a rel="noopener" target="_blank"
        href="https://github.com/NickColley/semaphore/blob/main/LICENSE">GNU Affero General Public License</a>.
     It is a continuation of the Pinafore project created by
-       <a rel="noopener" target="_blank" href="https://nolanlawson.com">Nolan Lawson</a>.
+       <a rel="noopener" target="_blank" href="https://nolanlawson.com">Nolan Lawson</a>. This is the "Chost" patch by <a href="https://blackle-mori.com/">Blackle Mori</a>.
   </p>
 
   <h2 id="privacy-policy">Privacy Policy</h2>

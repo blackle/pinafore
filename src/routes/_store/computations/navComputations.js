@@ -73,6 +73,12 @@ export function navComputations (store) {
           label: 'intl.home'
         },
         {
+          name: 'compose',
+          href: '/compose',
+          svg: '#fa-pencil',
+          label: 'intl.compose'
+        },
+        {
           name: 'notifications',
           href: '/notifications',
           svg: '#fa-bell',

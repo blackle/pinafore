@@ -1,0 +1,26 @@
+{#if $isUserLoggedIn}
+  <LazyComposeBox realm="home"/>
+{:else}
+  <HiddenFromSSR>
+    <FreeTextLayout>
+      <h1>{intl.compose}</h1>
+
+      <p>{intl.localTimelineNotLoggedIn}</p>
+    </FreeTextLayout>
+  </HiddenFromSSR>
+{/if}
+<script>
+  import LazyComposeBox from '../_components/compose/LazyComposeBox.html'
+  import FreeTextLayout from '../_components/FreeTextLayout.html'
+  import { store } from '../_store/store.js'
+  import HiddenFromSSR from '../_components/HiddenFromSSR.html'
+
+  export default {
+    store: () => store,
+    components: {
+      LazyComposeBox,
+      FreeTextLayout,
+      HiddenFromSSR
+    }
+  }
+</script>

@@ -19,13 +19,16 @@
       <AccountProfileDetails {account} {relationship} {verifyCredentials} />
     </div>
   </div>
-  <AccountProfileFilters account={$currentAccountProfile} {filter} />
 </div>
+<AccountProfileFilters account={$currentAccountProfile} {filter} />
 <style>
   .account-profile {
     position: relative;
     background-size: cover;
     background-position: center;
+    border: 1px solid var(--main-border);
+    border-radius: 6px;
+    overflow: clip;
   }
 
   .account-profile.moved {
@@ -40,15 +43,13 @@
     display: grid;
     grid-template-areas: "avatar     name        label     followed-by   follow"
                          "avatar     username    username  username      follow"
-                         "avatar     note        note      note          note"
-                         "meta       meta        meta      meta          meta"
-                         "details    details     details   details       details";
+                         "avatar     details     details   details       details"
+                         "note       note        note      note          note"
+                         "meta       meta        meta      meta          meta";
     grid-template-columns: min-content auto 1fr 1fr min-content;
     grid-column-gap: 15px;
     padding: 20px;
-    padding-bottom: 0;
     justify-content: center;
-    border-bottom: var(--main-border-size) solid var(--main-border);
   }
 
   @supports (-webkit-backdrop-filter: blur(1px) saturate(1%)) or (backdrop-filter: blur(1px) saturate(1%)) {

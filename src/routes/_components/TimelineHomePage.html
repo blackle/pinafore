@@ -8,7 +8,7 @@
   {#if hidePage}
     <LoadingPage />
   {/if}
-  <LazyComposeBox realm="home" hidden={hidePage}/>
+  <!-- <LazyComposeBox realm="home" hidden={hidePage}/> -->
   <div class="timeline-home-anchor-container">
     {#if !hidePage && hideTimeline}
       <LoadingPage />
@@ -30,7 +30,7 @@
   import LazyTimeline from './timeline/LazyTimeline.html'
   import { store } from '../_store/store.js'
   import LoadingPage from './LoadingPage.html'
-  import LazyComposeBox from './compose/LazyComposeBox.html'
+  // import LazyComposeBox from './compose/LazyComposeBox.html'
   import { formatIntl } from '../_utils/formatIntl.js'
 
   export default {
@@ -47,7 +47,7 @@
     },
     store: () => store,
     components: {
-      LazyComposeBox,
+      // LazyComposeBox,
       LazyTimeline,
       LoadingPage
     }

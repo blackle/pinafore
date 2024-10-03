@@ -7,15 +7,21 @@
          on:recalculateHeight
          ref:article
 >
-  {#if showHeader}
-    <StatusHeader {...params} />
-  {/if}
+{#if showHeader}
+<div class="status-header-group {isStatusInNotification ? '' : 'status-header-group-nopad'}">
+  <StatusHeader {...params} />
+</div>
+{/if}
+{#if !isStatusInNotification}
+<div class="status-author-group">
   <StatusAuthorName {...params} />
   <StatusAuthorHandle {...params} />
   {#if !isStatusInOwnThread}
     <StatusRelativeDate {...params} {...timestampParams} />
   {/if}
   <StatusSidebar {...params} />
+</div>
+<div class="status-content-group">
   {#if spoilerText}
     <StatusSpoiler {...params} {spoilerShown} on:recalculateHeight />
   {/if}
@@ -36,6 +42,8 @@
   {#if showPoll && (showContent || preloadHiddenContent)}
     <StatusPoll {...params} shown={showContent} on:recalculateHeight />
   {/if}
+</div>
+<div class="status-footer-group">
   {#if isStatusInOwnThread}
     <StatusDetails {...params} {...timestampParams} />
   {/if}
@@ -45,6 +53,8 @@
   {#if replyShown}
     <StatusComposeBox {...params} on:recalculateHeight />
   {/if}
+</div>
+{/if}
 </article>
 {#if enableShortcuts}
   <Shortcut scope={shortcutScope} key="o" on:pressed="open()" />
@@ -54,31 +64,69 @@
 
 <style>
   .status-article {
+    display: grid;
+    background: var(--main-bg);
+    border: var(--main-border-size) solid var(--main-border);
+    border-radius: 6px;
+    overflow: clip;
+    margin-bottom: 10px;
+  }
+
+  .status-article .status-header-group {
+    padding: var(--status-pad-v) var(--status-pad-h);
+    display: grid;
+    grid-template-areas: "header";
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content;
+  }
+
+  .status-article .status-header-group.status-header-group-nopad {
+    padding-bottom: 0;
+  }
+
+  .status-article .status-author-group {
     padding: var(--status-pad-v) var(--status-pad-h);
     display: grid;
     grid-template-areas:
-        "header  header       header        header"
-        "sidebar author-name  author-handle relative-date"
-        "sidebar spoiler      spoiler       spoiler"
-        "sidebar spoiler-btn  spoiler-btn   spoiler-btn"
-        "sidebar mentions     mentions      mentions"
-        "sidebar content      content       content"
-        "sidebar card         card          card"
-        "sidebar media-grp    media-grp     media-grp"
-        "sidebar poll         poll          poll"
-        "media   media        media         media"
-        "....... toolbar      toolbar       toolbar"
-        "compose compose      compose       compose";
+        "sidebar     author-name   author-name   author-name"
+        "sidebar     author-handle author-handle author-handle"
+        "sidebar     relative-date relative-date relative-date";
     grid-template-columns: min-content minmax(0, max-content) 1fr min-content;
+    grid-template-rows: repeat(3, max-content);
+/*    background: linear-gradient(to top, var(--banner-fill) -100%, #0000);*/
+    border-bottom: 1px solid var(--main-border);
+  }
+
+  .status-article .status-content-group {
+    padding: var(--status-pad-v) var(--status-pad-h);
+    display: grid;
+    grid-template-areas:
+        "spoiler"
+        "spoiler-btn"
+        "mentions"
+        "content"
+        "card"
+        "media-grp"
+        "poll"
+        "media";
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(8, max-content);
+  }
+
+  .status-article .status-footer-group {
+    padding: var(--status-pad-v) var(--status-pad-h);
+    display: grid;
+    grid-template-areas:
+        "details toolbar"
+        "compose compose";
+    grid-template-columns: 1fr auto;
+    grid-template-rows: repeat(2, max-content);
+/*    background: linear-gradient(to top, var(--banner-fill) -100%, #0000);*/
+    border-top: 1px solid var(--main-border);
   }
 
   .status-article.tap-on-status {
     cursor: pointer;
-  }
-
-  .status-article.status-in-timeline {
-    border-bottom: 1px solid var(--main-border);
   }
 
   .status-article.status-direct {
@@ -86,22 +134,7 @@
   }
 
   .status-article.status-in-own-thread {
-    grid-template-areas:
-      "sidebar     author-name"
-      "sidebar     author-handle"
-      "spoiler     spoiler"
-      "spoiler-btn spoiler-btn"
-      "mentions    mentions"
-      "content     content"
-      "card        card"
-      "media-grp   media-grp"
-      "media       media"
-      "poll        poll"
-      "details     details"
-      "toolbar     toolbar"
-      "compose     compose";
-    grid-template-columns: min-content 1fr;
-    grid-template-rows: repeat(7, max-content);
+    border-width: 3px;
   }
 </style>
 <script>

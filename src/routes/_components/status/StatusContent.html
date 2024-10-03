@@ -12,11 +12,6 @@
     display: none;
   }
 
-  .status-content.status-in-own-thread {
-    font-size: 1.3em;
-    margin: 20px 10px 20px 5px;
-  }
-
   .status-content.shown {
     display: block;
   }
@@ -29,23 +24,22 @@
       .status-content p,
       .status-content blockquote,
       .status-content ul,
-      .status-content ol) {
+      .status-content ol,
+      .status-content h1,
+      .status-content h2,
+      .status-content h3,
+      .status-content h4,
+      .status-content h5,
+      .status-content h6,
+      .status-content pre) {
     margin: 0 0 20px;
   }
 
-  :global(
-      .status-content p:first-child,
-      .status-content blockquote:first-child,
-      .status-content ul:first-child,
-      .status-content ol:first-child) {
+  :global(.status-content > *:first-child) {
     margin: 0 0 20px;
   }
 
-  :global(
-      .status-content p:last-child,
-      .status-content blockquote:last-child,
-      .status-content ul:last-child,
-      .status-content ol:last-child) {
+  :global(.status-content > *:last-child) {
     margin: 0;
   }
 
@@ -69,16 +63,6 @@
 
   :global(.underline-links .status-content a) {
     text-decoration: underline;
-  }
-
-  @media (max-width: 240px) {
-    :global(
-      .status-content p:last-child,
-      .status-content blockquote:last-child,
-      .status-content ul:last-child,
-      .status-content ol:last-child) {
-      margin: 0 0 10px; /* looks better on KaiOS with some spacing here */
-    }
   }
 
 </style>

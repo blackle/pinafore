@@ -62,10 +62,10 @@ const PERMISSIONS_POLICY = 'sync-xhr=(),document-domain=(),interest-cohort=()'
 const HTML_HEADERS = {
   'cache-control': 'public,max-age=3600',
   'content-security-policy': [
-    "default-src 'self'",
+    "default-src 'self' https://fonts.gstatic.com",
     `script-src 'self' ${SCRIPT_CHECKSUMS}`,
     "worker-src 'self'",
-    "style-src 'self' 'unsafe-inline'",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com",
     "img-src 'self' * data: blob:",
     "media-src 'self' *",
     "connect-src 'self' * data: blob:",
