@@ -30,7 +30,7 @@
     {/if}
 
     <span class="status-header-action">{actionText}</span>
-    {#if isStatusInNotification}
+    {#if isStatusInNotification && text !== ''}
       &nbsp;—&nbsp;<span class="status-header-text">{text}</span>
     {/if}
   </div>
@@ -54,7 +54,7 @@
   }
 
   .status-header.follow-notification {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
 
   .status-header-avatar a {
@@ -81,6 +81,12 @@
 
   :global(.status-header.status-in-notification .status-header-svg) {
     fill: var(--body-text-color);
+  }
+
+  :global(.status-header.follow-notification .status-header-svg) {
+    fill: var(--body-text-color);
+    width: 24px;
+    height: 24px;
   }
 
   .status-header-content {
@@ -180,7 +186,7 @@
         }
         return false
       },
-      text: ({ originalStatus }) => (originalStatus.text || '').substring(0, 100),
+      text: ({ originalStatus }) => ((originalStatus && originalStatus.text) || '').substring(0, 100),
       actionText: ({ notificationType, status, $currentVerifyCredentials }) => {
         if (notificationType === 'reblog') {
           return 'intl.rebloggedYou'
